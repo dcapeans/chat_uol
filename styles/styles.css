@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #e5e5e5;
+    background-color: #f3f3f3;
 }
 
 .login {
@@ -72,14 +72,20 @@ li {
     display: flex;
     align-items: center;
     background-color: #fff;
+    border-radius: 2px;
 }
 
-.log-in, .log-out {
+.status {
     background-color: #dcdcdc;
 }
 
-.private {
+.private_message {
     background-color: #ffdede;
+}
+
+.timestamp {
+    font-weight: 400;
+    color: #aaaaaa;
 }
 
 footer {
