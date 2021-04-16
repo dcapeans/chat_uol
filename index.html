@@ -14,16 +14,32 @@
     <section class="login">
         <img src="images/logo 2.png" alt="Logo Uol">
         <form class="login_form">
-            <input name="username" type="text" placeholder="Digite seu nome">
+            <input name="username" type="text" placeholder="Digite seu nome" autocomplete="off">
             <button>Entrar</button>
         </form>
-        
     </section>
 
     <header>
         <img src="images/logo 1.png" alt="Logo Uol">
-        <ion-icon name="people"></ion-icon>
+        <button name="user_list_button"><ion-icon name="people"></ion-icon></button>
     </header>
+
+    <section class="user_list hidden">
+        <div class="dark_background"></div>
+        <div class="user_list_tab">
+            <div class="user_names">
+                <p>Escolha um contato para enviar mensagem:</p>
+                <ul>
+                    
+                </ul>
+            </div>
+            <div class="message_type">
+                <p>Escolha a visibildade:</p>
+                <li name="public" class="selected"><ion-icon name="lock-open"></ion-icon>Público<ion-icon name="checkmark-sharp"></ion-icon></li>
+                <li name="private"><ion-icon name="lock-closed"></ion-icon>Reservadamente<ion-icon name="checkmark-sharp"></ion-icon></li>
+            </div>
+        </div>
+    </section>
 
     <section class="container">
         <ul class="feed">
@@ -33,9 +49,10 @@
 
     <footer>
         <form class="send_message_form">
-            <input name="message" type="text" placeholder="Escreva aqui...">
+            <input name="message" type="text" placeholder="Escreva aqui..." autocomplete="off">
             <button><ion-icon name="paper-plane-outline"></ion-icon></button>
         </form>
+        <p></p>
     </footer>
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
