@@ -68,13 +68,15 @@ header ion-icon {
 }
 
 li {
-    height: 40px;
+    min-height: 40px;
     margin: 4px 0;
+    padding: 5px 5px;
     display: flex;
     align-items: center;
     background-color: #fff;
     border-radius: 2px;
-    word-break: break-all;
+    word-break:keep-all;
+    line-height: 20px;
 }
 
 .status {

@@ -6,7 +6,9 @@ setInterval(checkActive, 5000)
 
 function login() {
     userName = document.querySelector(".login input").value
-    const response = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants", {name: userName})
+    const response = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants", {
+        name: userName
+    })
     response.then(handleLoginSuccess)
     response.catch(handleLoginError)
 }
@@ -20,7 +22,7 @@ function handleLoginSuccess() {
 }
 
 function handleLoginError(error) {
-    if(error.response.status === 400){
+    if (error.response.status === 400) {
         alert("Esse nome já existe. Tente um nome diferente!")
     } else {
         alert("Um erro inesperado ocorreu. Tente novamente.")
@@ -29,17 +31,19 @@ function handleLoginError(error) {
 }
 
 function checkActive() {
-    if(userName !== undefined) {
-        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", {name: userName})
+    if (userName !== undefined) {
+        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", {
+            name: userName
+        })
     }
 }
 
 function getMessages() {
     const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages")
-    promise.then(handleGetMessage) 
+    promise.then(handleGetMessage)
 }
 
-function handleGetMessage(response){
+function handleGetMessage(response) {
     const arr = response.data
     renderMessage(arr)
     autoScroller()
@@ -48,12 +52,20 @@ function handleGetMessage(response){
 function renderMessage(arr) {
     const feed = document.querySelector(".feed")
     feed.innerHTML = "";
-    for(let i = 0; i < arr.length; i++){
-        feed.innerHTML += `
-        <li class="${arr[i].type}">
-            <span class="timestamp">(${arr[i].time})</span>&nbsp<strong>${arr[i].from}</strong>&nbsppara&nbsp<strong>${arr[i].to}</strong>: ${arr[i].text}
-        </li>
-    `
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].type === "private_message" && (arr[i].to === userName || arr[i].from === userName)) {
+            feed.innerHTML += `
+                <li class="${arr[i].type}">
+                    <p><span class="timestamp">(${arr[i].time})</span>&nbsp<strong>${arr[i].from}</strong>&nbsppara&nbsp<strong>${arr[i].to}</strong>: ${arr[i].text}</p>
+                </li>
+            `
+        } else if(arr[i].type !== "private_message"){
+            feed.innerHTML += `
+                <li class="${arr[i].type}">
+                    <p><span class="timestamp">(${arr[i].time})</span>&nbsp<strong>${arr[i].from}</strong>&nbsppara&nbsp<strong>${arr[i].to}</strong>: ${arr[i].text}</p>
+                </li>
+            `
+        }
     }
 }
 
@@ -65,8 +77,8 @@ function autoScroller() {
 
 function formListenerInit() {
     const form = document.querySelector(".send_message_form")
-    
-    form.addEventListener("submit", function(event){
+
+    form.addEventListener("submit", function (event) {
         event.preventDefault();
         const messageText = form.querySelector("[name=message]").value
         const messageObj = {
@@ -76,13 +88,12 @@ function formListenerInit() {
             type: "message"
         }
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", messageObj)
-        request.catch(window.location.reload())
+        request.catch(window.location.reload)
         form.reset()
 
         return false
     })
-    
+
 }
 
 formListenerInit()
-
