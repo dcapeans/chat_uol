@@ -63,7 +63,8 @@ header ion-icon {
 }
 
 .container {
-    margin-top: 100px;
+    margin: 100px 0;
+    overflow-y: scroll;
 }
 
 li {
@@ -73,6 +74,7 @@ li {
     align-items: center;
     background-color: #fff;
     border-radius: 2px;
+    word-break: break-all;
 }
 
 .status {
@@ -96,9 +98,17 @@ footer {
     height: 80px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     background-color: #fff;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+footer form {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 footer input {
@@ -115,6 +125,11 @@ footer input::placeholder {
 
 input:focus {
     outline: none;
+}
+
+footer button {
+    background: transparent;
+    border-style: none;
 }
 
 footer ion-icon {
