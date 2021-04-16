@@ -2,15 +2,20 @@ let userName;
 let timeout;
 
 setInterval(checkActive, 5000)
+formListenerInit()
+loginListenerInit()
 
+function loginListenerInit() {
+    const form = document.querySelector(".login_form")
 
-function login() {
-    userName = document.querySelector(".login input").value
-    const response = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants", {
-        name: userName
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        userName = form.querySelector("[name=username]").value
+        const response = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants", {name: userName})
+        response.then(handleLoginSuccess)
+        response.catch(handleLoginError)
+        return false
     })
-    response.then(handleLoginSuccess)
-    response.catch(handleLoginError)
 }
 
 function handleLoginSuccess() {
@@ -59,7 +64,7 @@ function renderMessage(arr) {
                     <p><span class="timestamp">(${arr[i].time})</span>&nbsp<strong>${arr[i].from}</strong>&nbsppara&nbsp<strong>${arr[i].to}</strong>: ${arr[i].text}</p>
                 </li>
             `
-        } else if(arr[i].type !== "private_message"){
+        } else if (arr[i].type !== "private_message") {
             feed.innerHTML += `
                 <li class="${arr[i].type}">
                     <p><span class="timestamp">(${arr[i].time})</span>&nbsp<strong>${arr[i].from}</strong>&nbsppara&nbsp<strong>${arr[i].to}</strong>: ${arr[i].text}</p>
@@ -90,10 +95,7 @@ function formListenerInit() {
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", messageObj)
         request.catch(window.location.reload)
         form.reset()
-
         return false
     })
-
 }
 
-formListenerInit()

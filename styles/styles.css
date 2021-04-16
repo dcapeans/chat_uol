@@ -19,6 +19,12 @@ body {
     margin-bottom: 95px;
 }
 
+.login_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .login input {
     width: 261px;
     height: 54px;
